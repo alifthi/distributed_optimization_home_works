@@ -14,7 +14,7 @@ def calculate_gradient(function,x0,n=2, iterations=None):
 
 def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
     if x0==None:
-        x0=np.random.normal(size=n)
+        x0=np.random.normal(size=n)*5
     learning_rate=lambda grad:learning_dist/np.linalg.norm(grad)
     counter=0
     current_x = x0
@@ -30,15 +30,20 @@ def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
         next_x=current_x-learning_rate(grad)*grad
         if iteration==None:
             if np.linalg.norm(function(next_x)-function(current_x)) < eps:
-                return next_x,function(next_x), {'x':x, 'values':value, 'iterations':steps}
+                return next_x,function(next_x), {'x':np.array(x),
+                                                 'values':np.array(value),
+                                                 'iterations':steps}
         else:
             if counter==iteration:
-                return next_x,function(next_x), {'x':x, 'values':value, 'iterations':steps}
+                return next_x,function(next_x), {'x':np.array(x),
+                                                 'values':np.array(value),
+                                                 'iterations':steps}
         counter+=1
         current_x=next_x
 if __name__=='__main__':
-    function=lambda x : x[0]**2+-x[1]**2
+    function=lambda x : x[0]**2+x[1]**3
     final_argument, final_value, history =gradient_descent(function=function,learning_dist=0.01)
-    print(history)
-    utils = utils(function)
+    print(final_value)
+    utils = utils(function,history=history)
     utils.draw_cotours()
+    utils.draw_optim_path()
