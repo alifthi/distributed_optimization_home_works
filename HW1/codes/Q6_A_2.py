@@ -31,6 +31,6 @@ def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
         current_x=next_x
     
 if __name__=='__main__':
-    function=lambda x : x[0]**2+x[1]**2+2
+    function=lambda x : x[0]**2+x[1]**2
     a=gradient_descent(function=function)
     print(a)
