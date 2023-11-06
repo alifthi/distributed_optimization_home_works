@@ -19,21 +19,26 @@ def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
     counter=0
     current_x = x0
     eps=0.0001
+    steps=[]
+    value=[]
+    x=[]
     while True:
+        x.append(current_x)
+        value.append(function(current_x))
+        steps.append(counter)
         grad=calculate_gradient(function=function,x0=current_x,n=n)
         next_x=current_x-learning_rate(grad)*grad
         if iteration==None:
             if np.linalg.norm(function(next_x)-function(current_x)) < eps:
-                return next_x , function(next_x)
+                return next_x,function(next_x), {'x':x, 'values':value, 'iterations':steps}
         else:
             if counter==iteration:
-                return next_x,function(next_x)
-            counter+=1
+                return next_x,function(next_x), {'x':x, 'values':value, 'iterations':steps}
+        counter+=1
         current_x=next_x
-    
 if __name__=='__main__':
-    function=lambda x : x[0]**2+x[1]**3
-    a=gradient_descent(function=function)
+    function=lambda x : x[0]**2+-x[1]**2
+    final_argument, final_value, history =gradient_descent(function=function,learning_dist=0.01)
+    print(history)
     utils = utils(function)
     utils.draw_cotours()
-    print(a)
