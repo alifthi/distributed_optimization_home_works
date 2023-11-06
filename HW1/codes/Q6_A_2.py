@@ -1,4 +1,5 @@
 import numpy as np
+from utils import utils
 
 def calculate_gradient(function,x0,n=2, iterations=None):
     eps=0.00001
@@ -31,6 +32,8 @@ def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
         current_x=next_x
     
 if __name__=='__main__':
-    function=lambda x : x[0]**2+x[1]**2
+    function=lambda x : x[0]**2+x[1]**3
     a=gradient_descent(function=function)
+    utils = utils(function)
+    utils.draw_cotours()
     print(a)
