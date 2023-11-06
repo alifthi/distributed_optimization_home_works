@@ -23,7 +23,7 @@ class utils:
         stages=abs(max(self.history['values']))+1
         xrange = np.arange(-x_range, x_range, 0.01)
         yrange = np.arange(-y_range, y_range, 0.01)
-        c=np.arange(-stages,stages,0.1*stages)
+        c=np.arange(-stages,stages,0.01*stages)
         X, Y = np.meshgrid(xrange,yrange)
         plt.contour(X,Y,self.function([X,Y]),c)
         plt.plot(self.history['x'][:,0],self.history['x'][:,1])
