@@ -18,9 +18,9 @@ class utils:
         plt.show()
     def draw_optim_path(self):
         x=self.history['x']
-        x_range=max(x[:,0])+1
-        y_range=max(x[:,1])+1
-        stages=abs(max(self.history['values']))+1
+        x_range=max(x[:,0])+2
+        y_range=max(x[:,1])+2
+        stages=abs(max(self.history['values']))+2
         xrange = np.arange(-x_range, x_range, 0.01)
         yrange = np.arange(-y_range, y_range, 0.01)
         c=np.arange(-stages,stages,0.01*stages)
