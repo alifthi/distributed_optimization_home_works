@@ -20,7 +20,12 @@ class utils:
         x=self.history['x']
         x_range=max(x[:,0])+2
         y_range=max(x[:,1])+2
+        if x_range>10 or y_range>10:
+            y_range=10
+            x_range=10
         stages=abs(max(self.history['values']))+2
+        if stages>50:
+            stages=50
         xrange = np.arange(-x_range, x_range, 0.01)
         yrange = np.arange(-y_range, y_range, 0.01)
         c=np.arange(-stages,stages,0.01*stages)
