@@ -32,3 +32,4 @@ if __name__=='__main__':
     q=[[0],[0],[0]]
     p=5
     print(gradient_descent(Q,q,p))
+
