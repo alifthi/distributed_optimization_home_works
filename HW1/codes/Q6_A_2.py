@@ -42,9 +42,10 @@ def gradient_descent(function,n=2,learning_dist=0.01,x0=None,iteration=None):
         counter+=1
         current_x=next_x
 if __name__=='__main__':
-    function=lambda x : x[0]**4+x[1]**15+15
+    function=lambda x : x[0]**4+x[1]**6+15
     final_argument, final_value, history =gradient_descent(function=function,learning_dist=0.01)
     print(final_value)
     utils = utils(function,history=history)
     utils.draw_cotours()
     utils.draw_optim_path()
+    utils.plot_hist()

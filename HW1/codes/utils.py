@@ -30,5 +30,6 @@ class utils:
         plt.savefig('./resualts/path.jpg')
         plt.show()
     def plot_hist(self):
-        pass
+        plt.plot(self.history['iterations'],self.history['values'])
+        plt.show()
     

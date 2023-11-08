@@ -48,9 +48,10 @@ def gradient_descent(function,n=2,x0=None,iteration=None):
         current_x=next_x
         
 if __name__=='__main__':
-    function=lambda x : x[0]**4+x[1]**16-15
+    function=lambda x : x[0]**4+x[1]**16-15 
     final_argument, final_value, history =gradient_descent(function=function)
     print(final_value)
     utils = utils(function,history=history)
     utils.draw_cotours()
     utils.draw_optim_path()
+    utils.plot_hist()
