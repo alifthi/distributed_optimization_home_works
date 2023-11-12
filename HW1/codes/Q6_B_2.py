@@ -13,13 +13,13 @@ def calculate_gradient(x,A,B):
     grad=A[argmax]*((-1)**int(isNeg))
     return grad,B[argmax]
 
-def gradient_descent(A,B,C,D,n=50,learning_dist=0.001,x0=None,iteration=None):
+def gradient_descent(A,B,C,D,n=50,x0=None,iteration=None):
     if x0==None:
         x0=np.random.normal(size=[n,1])
-    counter=0
+    counter=1
     current_x = x0
     function=lambda A,x,b:np.abs(A.T@x+b)
-    learning_rate=lambda grad:learning_dist/np.linalg.norm(grad)
+    learning_rate=lambda step:0.1/np.sqrt(step)
     eps=0.001
     steps=[]
     value=[]
@@ -30,7 +30,7 @@ def gradient_descent(A,B,C,D,n=50,learning_dist=0.001,x0=None,iteration=None):
         grad,b=calculate_gradient(current_x,A,B)
         x.append(current_x)
         value.append(function(grad,current_x,b))
-        alpha=learning_rate(grad)
+        alpha=learning_rate(counter)
         grad=grad[:,None]
         next_x=current_x-alpha*grad
         if iteration==None:
