@@ -85,7 +85,7 @@ def newton(function,n=2,x0=None,iteration=None):
         counter+=1
         current_x=next_x
 if __name__=='__main__':
-    function=lambda x : x[0]**2+x[1]**2
+    function=lambda x : np.abs(x[0])+np.abs(x[1])
     final_argument, final_value, history =newton(function=function)
     print(final_value,history)
     utils = utils(function,history=history)

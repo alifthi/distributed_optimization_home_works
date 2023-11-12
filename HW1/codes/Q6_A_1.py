@@ -28,8 +28,8 @@ def gradient_descent(Q,q,p,x0=None,iteration=None,learning_rate=None):
             counter+=1
         current_x=next_x                
 if __name__=='__main__':
-    Q = [[10,0.1,0.25],[3,1,0.2],[3,2,1]]
-    q=[[0],[0],[0]]
-    p=5
+    Q = [[48,12],[8,2.092]]
+    q=[[13],[23]]
+    p=4
     print(gradient_descent(Q,q,p))
 
