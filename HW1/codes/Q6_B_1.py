@@ -34,10 +34,13 @@ def gradient_descent(A,B,C,D,n=50,learning_dist=0.001,x0=None,iteration=None):
         grad=grad[:,None]
         next_x=current_x-alpha*grad
         if iteration==None:
-            if counter%1000==0:
-                print(function(grad,current_x,b))
             if np.linalg.norm(function(grad,current_x,b)-function(grad,next_x,b)) < eps:
                 return next_x,function(grad,current_x,b), {'x':np.array(x),
+                                                 'values':np.array(value),
+                                                 'iterations':steps}
+            if counter> 100000:
+                argument=np.argmin(value)
+                return x[argument],value[argument],{'x':np.array(x),
                                                  'values':np.array(value),
                                                  'iterations':steps}
         else:
@@ -55,4 +58,7 @@ if __name__=='__main__':
     B=np.random.normal(0,4,[m,1])
     C=np.random.normal(0,4,[n,1])
     D=np.random.normal(0,4,1)
-    next_x,_,diction=gradient_descent(A,B,C,D)
+    x_min,min_val,history=gradient_descent(A,B,C,D)
+    print(f'minimume happens at: {x_min}, value: {min_val}')
+    utils = utils(function=None,history=history,name=f'Q6_B_1')
+    utils.plot_hist()
