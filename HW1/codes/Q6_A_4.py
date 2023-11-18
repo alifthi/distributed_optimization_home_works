@@ -15,10 +15,10 @@ def calculate_gradient(function,x0,n=2):
     return grad
 
 def calculate_hessian(function, x0, n):
-    eps=0.0001
+    eps=0.1
     grad=np.zeros([n,n])
-    for i in range(n):
-        for j in range(n):
+    for j in range(n):
+        for i in range(n):
             if i==j:
                 x1=x0.copy()
                 x2=x0.copy()
@@ -52,13 +52,15 @@ def calculate_hessian(function, x0, n):
                 
                 y=y1-y3-y2+y4
                 grad[i,j]=y/(4*eps**2)
-            else:
+            elif i<j:
                 grad[j,i]=grad[i,j]
     return grad        
 
 def newton(function,n=2,x0=None,iteration=None):
     if x0==None:
         x0=np.random.normal(size=n)
+    else:
+        x0=np.array(x0)
     counter=0
     current_x = x0
     eps=0.0001
@@ -85,10 +87,21 @@ def newton(function,n=2,x0=None,iteration=None):
         counter+=1
         current_x=next_x
 if __name__=='__main__':
-    function=lambda x : np.abs(x[0])+np.abs(x[1])
-    final_argument, final_value, history =newton(function=function)
-    print(final_value,history)
-    utils = utils(function,history=history)
-    utils.draw_cotours()
-    utils.draw_optim_path()
-    utils.plot_hist()
+    # to use problem 10 uncomment this part and comment part 11
+    # b=150
+    # a=-2
+    # n=2
+    # x0=[0.2,0.2]
+    # function=lambda x : sum([b*(x[i+1]**2-x[i])**2 + (x[i]-a) for i in range(0,n-1)])
+    #################################
+    # to use problem 11 uncomment this part and comment part 10
+    n=4
+    x0=[0.1,0.2,0.2,0.2]
+    function=lambda x : (x[0]-10*x[2])**2+5*(x[2]-x[3])**2+(x[1]-2*x[2])**4+10*(x[0]-x[3])**4
+    ####################################################################
+    final_argument, final_value, history =newton(function=function,x0=x0,n=n)
+    print(final_value)
+    util = utils(function,history=history,name=f'Q6_A_x1_{x0[0]}_x2_{x0[1]}_4')
+    util.draw_cotours()
+    util.draw_optim_path()
+    util.plot_hist()
